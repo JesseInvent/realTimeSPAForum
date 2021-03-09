@@ -17,6 +17,10 @@ import vuetify from '../plugins/vuetify' // path to vuetify export
 
 Vue.component('AppHome', require('./components/AppHome.vue').default);
 import router from './Router/router'
+import User from './Helpers/User'
+
+window.User = User
+console.log(User.id());
 
 const app = new Vue({
     vuetify: vuetify,
