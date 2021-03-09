@@ -1,6 +1,8 @@
 <template>
-  <v-form @submit.prevent="login">
+
     <v-container>
+
+      <v-form @submit.prevent="login">
  
         <v-col
           cols="12"
@@ -25,16 +27,30 @@
         </v-col>
 
       <v-col>
-            <v-btn
+
+       <v-btn
             color="blue"
             type="submit"
         >
             Login
         </v-btn>
+
+        <!-- <v-btn
+          color="blue"
+          type="submit"
+        >
+          Signup
+        </v-btn> -->
+
+        <router-link to="/signup">
+            <v-btn>Signup</v-btn>
+        </router-link>
+
       </v-col>
       
-    </v-container>
-  </v-form>
+    </v-form>
+
+  </v-container>
 
 </template>
 
@@ -57,6 +73,12 @@ export default {
             User.login(this.form);
         }
 
+    },
+
+    created () {
+       if (user.isLoggedIn()) {
+         this.$router.push({name: 'forum'})
+       }
     }
 }
 

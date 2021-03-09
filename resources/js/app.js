@@ -20,7 +20,8 @@ import router from './Router/router'
 import User from './Helpers/User'
 
 window.User = User
-console.log(User.id());
+
+window.EventBus = new Vue();
 
 const app = new Vue({
     vuetify: vuetify,
