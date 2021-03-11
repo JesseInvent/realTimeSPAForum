@@ -2,12 +2,27 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Concerns\HasAttributes;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Question extends Model
 {
     use HasFactory;
+
+    protected static function boot () 
+    {
+        parent::boot();
+
+        static::creating(function($question){
+            $question->slug = Str::slug($question->title);
+        });
+    }
+
+    // protected $guarded = [];
+
+    protected $fillable = ['title', 'slug', 'body', 'user_id', 'category_id'];
 
     public function getRouteKeyName ()
     {
@@ -16,10 +31,8 @@ class Question extends Model
 
     public function getPathAttribute ()
     {
-        return asset("api/question/{$this->slug}");
+        return "/question/{$this->slug}";
     }
-
-    protected $guarded = [];
 
     public function user ()
     {

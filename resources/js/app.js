@@ -13,14 +13,18 @@ window.Vue = require('vue').default;
 // import Vue from 'vue'
 import vuetify from '../plugins/vuetify' // path to vuetify export
 
-// Vue.use(vuetify);
 
-Vue.component('AppHome', require('./components/AppHome.vue').default);
 import router from './Router/router'
 import User from './Helpers/User'
+import VueSimplemde from 'vue-simplemde'
+import md from 'marked'
+
+Vue.component('AppHome', require('./components/AppHome.vue').default);
+Vue.component('VueSimplemde', VueSimplemde)
+
 
 window.User = User
-
+window.md = md
 window.EventBus = new Vue();
 
 const app = new Vue({
