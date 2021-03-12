@@ -3,6 +3,7 @@
     <v-container fluid grid-list-md>
 
         <v-layout row wrap>
+            
             <v-flex xs8>
                 <questions
                     v-for="question in questions"
@@ -10,7 +11,11 @@
                     :question="question"
                 ></questions>
             </v-flex>
-            sidebar
+
+            <v-flex xs4>
+                <app-sidebar></app-sidebar>
+            </v-flex>
+
         </v-layout>
 
     </v-container>
@@ -18,11 +23,13 @@
 </template>
 
 <script>
+
 import questions from './Questions'
+import AppSidebar from './AppSidebar'
 
 export default {
 
-    components: { questions },
+    components: { questions, AppSidebar },
 
     data () {
         return {

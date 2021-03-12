@@ -37,7 +37,7 @@ class User {
         window.location = '/forum';
     }
 
-    name() {
+    name () {
         if(this.loggedIn ()) {
             return AppStorage.getUser();
         }
@@ -52,6 +52,11 @@ class User {
 
     own (id) {
         return this.id() == id
+    }
+
+    admin () {
+        // console.log(this.id());
+        return this.id() == 14
     }
 }
 

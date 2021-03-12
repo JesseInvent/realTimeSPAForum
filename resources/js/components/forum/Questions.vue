@@ -1,7 +1,7 @@
 <template>
-  <v-card
-    class="mx-auto"
-  >
+
+  <v-card class="mx-auto" >
+
     <v-card-title primary-title style="margin: 6px">
         <div>
             <h3 class="headline mb-0">
@@ -18,13 +18,14 @@
     </v-card-text>
  
   </v-card>
+
 </template>
 
 <script>
 
-    export default {
-        props: ['question']
-    }
+export default {
+    props: ['question']
+}
 
 </script>
 
