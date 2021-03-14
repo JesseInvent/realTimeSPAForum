@@ -39,13 +39,20 @@ export default {
         if(User.loggedIn()) {
             this.getNotifications()
         }
+
+        Echo.private('App.Models.User.' + User.id())
+            .notification((notification) => {
+                console.log(notification);
+                this.unread.unshift(notification)
+                this.unreadCount++
+        });
     },
 
     methods: {
         getNotifications () {
             axios.post('/api/notifications')
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     this.read = res.data.read
                     this.unread = res.data.unread
                     this.unreadCount = res.data.unread.length

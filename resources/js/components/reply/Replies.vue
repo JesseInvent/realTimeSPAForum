@@ -35,6 +35,7 @@ export default {
     methods: {
 
         listen () {
+
             EventBus.$on('newReply', (reply) => {
                  this.content.unshift(reply)
             });
@@ -45,6 +46,16 @@ export default {
                         this.content.splice(index, 1)
                     })
             })
+
+            Echo.private('App.Models.User.' + User.id())
+                .notification((notification) => {
+                    this.content.unshift(notification.reply)
+                });
+
+            Echo.channel('deleteReplyChannel')
+                .listen('DeleteReplyEvent', (e) => {
+                    this.content = this.content.filter(el => el.id !== e.id);
+                })
         }
 
     }

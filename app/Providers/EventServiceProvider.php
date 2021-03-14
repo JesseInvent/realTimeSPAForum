@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Events\LikeEvent;
+use App\Listeners\LikeEventListener;
+use App\Events\DeleteReplyEvent;
+use App\Listeners\DeleteReplyEventListener;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,6 +22,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        LikeEvent::class => [
+            LikeEventListener::class,
+        ],
+        DeleteReplyEvent::class => [
+            DeleteReplyEventListener::class,
+        ]
     ];
 
     /**
