@@ -7,6 +7,8 @@
             <v-card-title>
                 <div class="headline">{{ data.user }}</div>
                 <div class="ml-2">said {{ data.created_at }}</div>
+                <v-spacer></v-spacer>
+                <like :content="data"></like>
             </v-card-title>
 
             <v-divider></v-divider>
@@ -27,7 +29,7 @@
                     <v-btn icon @click="edit">
                         <v-icon color="blue">mdi-pencil</v-icon>
                     </v-btn>
-                    <v-btn icon @click="destroy">
+                    <v-btn icon @click="destroy">  
                         <v-icon color="red">mdi-delete</v-icon>
                     </v-btn>
 
@@ -43,10 +45,11 @@
 <script>
 
 import EditReply from './EditReply'
+import Like from '../likes/like'
 
 export default {
 
-    components: { EditReply },
+    components: { EditReply, Like },
     
     props: ['data', 'index'],
 
