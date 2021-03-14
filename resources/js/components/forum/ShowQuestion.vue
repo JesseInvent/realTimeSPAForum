@@ -9,7 +9,7 @@
                     <h6 class="grey--text">{{ question.user }} said {{question.created_at}}</h6>
                 </div>
                 <v-spacer></v-spacer>
-                <v-btn color="teal" dark>{{ question.reply_count }} Replies</v-btn>
+                <v-btn color="teal" dark>{{ replyCount }} Replies</v-btn>
             </v-card-title>
             <v-card-text v-html="body"></v-card-text>
                 <v-col v-if="own">
@@ -39,7 +39,8 @@ export default {
     props : ['question'],
     data () { 
         return {
-            own: User.own(this.question.user_id)
+            own: User.own(this.question.user_id),
+            replyCount: this.question.reply_count
         }
     },
     computed: {
@@ -58,7 +59,27 @@ export default {
         emit () {
             EventBus.$emit('startEditting');
         }
-    } 
+    },
+
+    created () {
+        EventBus.$on('newReply', () => {
+            this.replyCount++
+        })
+        
+        EventBus.$on('deleteReply', () => {
+            this.replyCount--
+        })
+
+        Echo.private('App.Models.User.' + User.id())
+            .notification((notification) => {
+            this.replyCount++
+        });
+
+        Echo.private('App.Models.User.' + User.id())
+            .notification((notification) => {
+            this.replyCount--
+        });
+    }
 }
 
 </script>

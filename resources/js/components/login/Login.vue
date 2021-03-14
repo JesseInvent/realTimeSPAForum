@@ -76,7 +76,7 @@ export default {
     },
 
     created () {
-       if (User.isLoggedIn()) {
+       if (User.loggedIn()) {
          this.$router.push({name: 'forum'})
        }
     }

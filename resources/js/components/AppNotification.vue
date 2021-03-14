@@ -42,7 +42,7 @@ export default {
 
         Echo.private('App.Models.User.' + User.id())
             .notification((notification) => {
-                console.log(notification);
+                // console.log(notification);
                 this.unread.unshift(notification)
                 this.unreadCount++
         });
@@ -57,6 +57,7 @@ export default {
                     this.unread = res.data.unread
                     this.unreadCount = res.data.unread.length
                 })
+                .catch(error => Exception.handle(error))
         },
 
         readIt (notification, index) {

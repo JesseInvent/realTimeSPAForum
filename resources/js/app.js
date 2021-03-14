@@ -16,6 +16,7 @@ import vuetify from '../plugins/vuetify' // path to vuetify export
 
 import router from './Router/router'
 import User from './Helpers/User'
+import Exception from './Helpers/Exception'
 import VueSimplemde from 'vue-simplemde'
 import md from 'marked'
 
@@ -24,6 +25,7 @@ Vue.component('VueSimplemde', VueSimplemde)
 
 
 window.User = User
+window.Exception = Exception
 window.md = md
 window.EventBus = new Vue();
 
