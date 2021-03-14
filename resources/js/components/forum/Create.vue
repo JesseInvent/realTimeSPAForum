@@ -5,6 +5,7 @@
         <v-form @submit.prevent="create">
  
             <v-col cols="12" >
+                <span class="red--text" v-if="errors.title">{{errors.title[0]}}</span>
                 <v-text-field
                     v-model="form.title"
                     label="Title"
@@ -14,16 +15,7 @@
             </v-col>
 
             <v-col cols="12" >
-                <!-- <v-select
-                    :items="categories"
-                    v-model="form.category_id"
-                    item-text="name"
-                    item-value="id"
-                    label="Category"
-                    autocomplete
-                >
-                </v-select> -->
-
+                <span class="red--text" v-if="errors.title">{{errors.category_id[0]}}</span>
                 <v-autocomplete
                     label="Category"
                     v-model="form.category_id"
@@ -34,6 +26,7 @@
             </v-col>
 
             <v-col>
+                 <span class="red--text" v-if="errors.title">{{errors.body[0]}}</span>
                   <vue-simplemde v-model="form.body" />
             </v-col>
 
@@ -41,6 +34,7 @@
                <v-btn 
                     color=""
                     type="submit"
+                    :disabled="disabled"
                 >Create
                </v-btn>
             </v-col>
@@ -75,7 +69,13 @@ export default {
         create () {
             axios.post('/api/question', this.form)
                 .then(res => this.$router.push(res.data.path))
-                .catch(error => this.errors = error.response.data.error)
+                .catch(error => this.errors = error.response.data.errors)
+        }
+    },
+
+    computed: {
+        disabled () {
+            return !(this.form.title && this.form.body && this.form.category_id)
         }
     }
 }

@@ -3,6 +3,8 @@
     <div>
 
         <v-container>
+
+        <v-alert  type="error" v-if="errors">Please give category name</v-alert>
             <v-form @submit.prevent="submit">
                 <v-text-field
                     v-model="form.name"
@@ -11,8 +13,8 @@
                     required
                 ></v-text-field>
 
-                <v-btn color="green" type="submit" v-if="editSlug">Update</v-btn>
-                <v-btn color="blue" type="submit" v-else>Create</v-btn>
+                <v-btn color="green" :disabled="disabled" type="submit" v-if="editSlug">Update</v-btn>
+                <v-btn color="blue" :disabled="disabled" type="submit" v-else>Create</v-btn>
             </v-form>
 
             <v-card class="pt-5">
@@ -72,10 +74,9 @@ export default {
             form : {
                 name: ''
             },
-
             categories: {},
-
-            editSlug: ''
+            editSlug: '',
+            errors: null
         }
 
     },
@@ -88,7 +89,8 @@ export default {
                .then(res => {
                    this.categories.unshift(res.data)
                    this.form.name = ''
-               });
+               })
+               .catch(error => this.errors = error.response.data.errors)
 
         },
 
@@ -118,6 +120,12 @@ export default {
             this.categories.splice(index, 1);
         }
 
+    },
+
+    computed: {
+        disabled () {
+            return !this.form.name
+        }
     },
      
     created () {

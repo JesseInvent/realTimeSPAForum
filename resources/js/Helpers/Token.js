@@ -25,7 +25,7 @@ class Token {
     }
 
     isBase64(str) {
-        console.log(btoa(atob(str)));
+        // console.log(btoa(atob(str)));
         try {
             return btoa(atob(str)).replace(/=/g, "") == str
         } catch (error) {

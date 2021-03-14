@@ -3,10 +3,12 @@
     color="grey lighten-4"
     flat
   >
-    <v-toolbar dense>
+    <v-toolbar color="blue" dark dense>
       <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
 
-      <v-toolbar-title>GCMI Guest </v-toolbar-title>
+      <v-toolbar-title>
+        <router-link class="white--text" to="/">iNVENT</router-link>  
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -18,7 +20,7 @@
           v-for="item in showTabs"
           :key="item.title"
           :to="item.to">
-            <v-btn>{{item.title}}</v-btn>
+            <v-btn color="blue" dark class="text--white">{{item.title}}</v-btn>
           </router-link>
           
       </div>
